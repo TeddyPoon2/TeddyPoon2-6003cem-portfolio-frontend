@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+// import './App.css'
+import "antd/dist/reset.css";
+import { Card, Button, DatePicker, Flex, Col, Row } from "antd";
+import Hello from "./components/hello";
+import DetailCard from "./components/DetailCard";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  let counter = 0;
+  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+    console.log(date, dateString);
+  };
+  const onClick = (event: any) => {
+    console.log(counter++);
+  };
+
+  const add = () => setCount((count) => count + 1);
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Hello name="Good Bye" />
+        <div style={{maxWidth: "80%"}}>
+          <Row gutter={[16, 24]}>
+            {Array.from({ length: 6 }, (_, i) => (
+              <Col className="gutter-row" span={24} md={8}>
+                <DetailCard />
+              </Col>
+            ))}
+          </Row>
+        </div>
+        <br />
+
+        <Button type="primary" onClick={add}>
+          {count}
+        </Button>
+        <Button type="primary" danger>
+          Button
+        </Button>
+
+        <br />
+        <DatePicker onChange={onChange} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
