@@ -1,52 +1,46 @@
-import { useState } from "react";
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-import "antd/dist/reset.css";
-import { Card, Button, DatePicker, Flex, Col, Row } from "antd";
-import Hello from "./components/hello";
-import DetailCard from "./components/DetailCard";
+import { Layout, Space } from "antd";
+// import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./components/home";
+import Articles from "./components/Articles";
+import DetailArticle from "./components/DetailArticle";
 
-function App() {
-  const [count, setCount] = useState(0);
+// import Dashboard from "./components/dashboard";
+// import About from "./components/about";
 
-  let counter = 0;
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-  const onClick = (event: any) => {
-    console.log(counter++);
-  };
+const { Header, Content, Footer } = Layout;
 
-  const add = () => setCount((count) => count + 1);
-
+const App = () => {
   return (
-    <>
-      <div>
-        <Hello name="Good Bye" />
-        <div style={{maxWidth: "80%"}}>
-          <Row gutter={[16, 24]}>
-            {Array.from({ length: 6 }, (_, i) => (
-              <Col className="gutter-row" span={24} md={8}>
-                <DetailCard />
-              </Col>
-            ))}
-          </Row>
-        </div>
-        <br />
+    <Layout style={{ height: "100%", width: "100%" }}>
+      <Router>
+        <Header>
+          <nav>
+            <Space>
+              <Link to="/">Home</Link>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/about">About</Link>
+              <Link to="/articles">Articles</Link>
+            </Space>
+          </nav>
+        </Header>
 
-        <Button type="primary" onClick={add}>
-          {count}
-        </Button>
-        <Button type="primary" danger>
-          Button
-        </Button>
+        <Content>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:aid" element={<DetailArticle />} />
+            {/* <Route path="/about" element={<About />} />
+          <Route path="/dashboard" element={<Dashboard />} /> */}
+          </Routes>
+        </Content>
 
-        <br />
-        <DatePicker onChange={onChange} />
-      </div>
-    </>
+        <Footer>
+          <p>VT6003CEM Demo</p>
+        </Footer>
+      </Router>
+    </Layout>
   );
-}
-
+};
 export default App;
