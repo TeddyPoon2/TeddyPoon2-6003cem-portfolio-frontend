@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/home";
 import Articles from "./components/Articles";
 import DetailArticle from "./components/DetailArticle";
+import Newarticle from "./components/Newarticle";
 
 // import Dashboard from "./components/dashboard";
 // import About from "./components/about";
@@ -22,6 +23,7 @@ const App = () => {
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/about">About</Link>
               <Link to="/articles">Articles</Link>
+              <Link to="/articles/new">New Articles</Link>
             </Space>
           </nav>
         </Header>
@@ -31,6 +33,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/articles/:aid" element={<DetailArticle />} />
+            <Route path="/articles/new" element={<Newarticle />} />
             {/* <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Dashboard />} /> */}
           </Routes>
